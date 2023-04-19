@@ -4,30 +4,35 @@ import { FaGithub, FaPlus, FaSpinner, FaBars, FaTrash } from 'react-icons/fa'
 
 import { Container, Form, SubmitButton, List, DeleteButton } from './styles'
 
+import { Link } from "react-router-dom"
+
 import api from '../../services/api'
 
 export default function Main() {
     
     const [newRepo, setNewRepo] = useState('');
 
-    const [repositorios, setRepositorios] = useState([]); // array de repos
+    // const [repositorios, setRepositorios] = useState([]); // array de repos
+
+    const [repositorios, setRepositorios] = useState(JSON.parse(localStorage.getItem('repos') ?? [])); // array de repos
 
     const [loading, setLoading] = useState(false);
 
     const [alert, setAlert] = useState(null);
 
     // Buscar
-    useEffect(() => {
-        const repoStorage = localStorage.getItem('repos');
+    // useEffect(() => {
+    //     const repoStorage = localStorage.getItem('repos');
 
-        if(repoStorage) {
-            setRepositorios(JSON.parse(repoStorage));
-        }
+    //     if(repoStorage) {
+    //         setRepositorios(JSON.parse(repoStorage));
+    //     }
 
-    }, []);
+    // }, []);
     
 
     // Salvar alterações
+    
     useEffect(() => {
         localStorage.setItem('repos', JSON.stringify(repositorios));
     }, [repositorios]);
@@ -120,9 +125,9 @@ export default function Main() {
                         </DeleteButton>
                         {repo.name}
                         </span>
-                        <a href="">
+                        <Link to={`/repositorio/${ encodeURIComponent(repo.name)}`}> {/* evitar que o / do repositorio interfira na url, ex: angular/angular */}
                             <FaBars size={20}/>
-                        </a>
+                        </Link>
                     </li>
                 ))}
             </List>
