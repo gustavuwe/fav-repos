@@ -11,13 +11,10 @@ import api from '../../services/api'
 export default function Main() {
     
     const [newRepo, setNewRepo] = useState('');
-
     // const [repositorios, setRepositorios] = useState([]); // array de repos
-
-    const [repositorios, setRepositorios] = useState(JSON.parse(localStorage.getItem('repos') ?? [])); // array de repos
-
+    const [repositorios, setRepositorios] = useState([]); // array de repos
+    console.log(repositorios)
     const [loading, setLoading] = useState(false);
-
     const [alert, setAlert] = useState(null);
 
     // Buscar
@@ -32,6 +29,13 @@ export default function Main() {
     
 
     // Salvar alterações
+
+    useEffect(() => {
+        const verifyLocalStorage = JSON.parse(localStorage.getItem('repos'))
+        if (verifyLocalStorage && verifyLocalStorage.length > 0) {
+            setRepositorios(verifyLocalStorage)
+        }
+    }, [])
     
     useEffect(() => {
         localStorage.setItem('repos', JSON.stringify(repositorios));
@@ -125,7 +129,7 @@ export default function Main() {
                         </DeleteButton>
                         {repo.name}
                         </span>
-                        <Link to={`/repositorio/${ encodeURIComponent(repo.name)}`}> {/* evitar que o / do repositorio interfira na url, ex: angular/angular */}
+                        <Link to={`/repositorio/${ encodeURIComponent(repo.name)}`} target="_blank"> {/* evitar que o / do repositorio interfira na url, ex: angular/angular */}
                             <FaBars size={20}/>
                         </Link>
                     </li>
