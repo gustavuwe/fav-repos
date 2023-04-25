@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 
 import { FaGithub, FaPlus, FaSpinner, FaBars, FaTrash } from 'react-icons/fa'
 
-import { Container, Form, SubmitButton, List, DeleteButton } from './styles'
+import { Container, Form, SubmitButton, List, DeleteButton, RepoButton } from './styles'
 
 import { Link } from "react-router-dom"
 
@@ -129,9 +129,9 @@ export default function Main() {
                         </DeleteButton>
                         {repo.name}
                         </span>
-                        <Link to={`/repositorio/${ encodeURIComponent(repo.name)}`} target="_blank"> {/* evitar que o / do repositorio interfira na url, ex: angular/angular */}
+                        <RepoButton as="a" href={`/repositorio/${ encodeURIComponent(repo.name)}`}> {/* evitar que o / do repositorio interfira na url, ex: angular/angular */}
                             <FaBars size={20}/>
-                        </Link>
+                        </RepoButton>
                     </li>
                 ))}
             </List>

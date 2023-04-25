@@ -108,3 +108,7 @@ export const DeleteButton = styled.button.attrs({
     outline: 0;
     border-radius: 4px;
 `;
+
+export const RepoButton = styled.button`
+
+`

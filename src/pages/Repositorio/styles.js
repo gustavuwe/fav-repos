@@ -45,7 +45,7 @@ export const Owner = styled.header`
     }
 `;
 
-export const BackButton = styled(Link)`
+export const BackButton = styled.button`
     border: 0;
     outline: 0;
     background: transparent;
